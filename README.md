@@ -63,6 +63,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.bythepowerofscience:BrigadierDSL:v1.0.2")
+    implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:v1.0.2") { setTransitive(false) })
 }
 ```
