@@ -9,11 +9,13 @@ version = "1.0.0"
 repositories {
     mavenCentral()
     maven(url="https://libraries.minecraft.net")
+    maven(url="https://jitpack.io")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.mojang:brigadier:1.0.18")
+    runtimeOnly("btpos.dsl.brigadier:BrigadierDSL:1.0.0")
 }
 
 tasks.test {

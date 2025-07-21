@@ -58,5 +58,3 @@ dependencies {
     implementation("btpos.dsl.brigadier:BrigadierDSL:1.0.0")
 }
 ```
-
-Also there's a 
