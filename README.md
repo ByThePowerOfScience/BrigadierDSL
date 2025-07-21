@@ -15,6 +15,7 @@ Command.literal<CommandSourceStack>("find") {
         "item_arg"(StringArgumentType.string()) {
             requires { it.isPlayer }
             // Add suggestions. The ! operator adds a literal, and the invoke adds a literal with a tooltip.
+	    // (The + operator was already taken on integers.)
             suggests { ctx ->
                 !"ball"
                 !1
@@ -29,15 +30,15 @@ Command.literal<CommandSourceStack>("find") {
                     ?: return@executes ctx.sendFailure("You didn't ask for an item!")
                 
                 if (toFind == "car")
-                    return@executes ctx.sendSuccess("yay!")
+                    return@executes ctx.sendSuccess("vroom!")
                 
-                return@executes 0
+                return@executes Command.FAIL
             }
             "here" {
                 executes(::myCommand)
-            } 
-		        // If you have another function that produces a LiteralArgumentBuilder or a previously-compiled CommandNode, 
-		        // add it with +
+            }
+	   // If you have another function that produces a LiteralArgumentBuilder or a previously-compiled CommandNode, 
+	   // add it with +
             +makeSubCommand()
         }
     }
