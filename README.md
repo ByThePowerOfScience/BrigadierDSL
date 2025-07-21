@@ -55,7 +55,6 @@ More macros are available in [MCSpecificMacros.kt](MCSpecificMacros.kt) for work
 
 ### Gradle:
 
-Kotlin:
 ```kotlin
 repositories {
     mavenCentral()
@@ -63,15 +62,15 @@ repositories {
 }
 
 dependencies {
-    implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:v1.0.2") { setTransitive(false) })
+    implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:1.0.0"))
 }
 ```
 
 If you're using ForgeGradle:
 ```kotlin
 dependencies {
-    implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:v1.0.2") { setTransitive(false) }) {
-        jarJar.ranged(this, "[v1,)")
+    implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:1.0.0")) {
+        jarJar.ranged(this, "[1,)")
     }
 }
 ```
