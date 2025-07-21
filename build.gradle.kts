@@ -29,7 +29,7 @@ publishing {
             groupId = "com.github.bythepowerofscience"
             artifactId = "BrigadierDSL"
             version = "1.0.0"
-            from(components["kotlin"])
+            from(components["java"])
         }
     }
 }
