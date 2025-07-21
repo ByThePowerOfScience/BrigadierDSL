@@ -47,7 +47,7 @@ Command.literal<CommandSourceStack>("find") {
 
 There's also `redirect` and `fork` support, as well as anything else I could find in the assorted builders.
 
-I also did my best to document the dang thing, since Mojang didn't.  I still don't fully understand what half of it does, but I did my best.
+I also did my best to document the dang thing.  I still don't fully understand what half of it does, but I did my best.
 
 More macros are available in [MCSpecificMacros.kt](MCSpecificMacros.kt) for working with Minecraft specifically.  Just pop the file in your project yourself if you want to use them; I couldn't be bothered to get a standalone MC build working here.
 
