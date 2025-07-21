@@ -66,3 +66,12 @@ dependencies {
     implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:v1.0.2") { setTransitive(false) })
 }
 ```
+
+If you're using ForgeGradle:
+```kotlin
+dependencies {
+    implementation(jarJar("com.github.bythepowerofscience:brigadierdsl:v1.0.2") { setTransitive(false) }) {
+        jarJar.ranged(this, "[v1,)")
+    }
+}
+```
