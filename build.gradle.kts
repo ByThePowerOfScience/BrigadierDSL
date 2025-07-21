@@ -27,8 +27,11 @@ kotlin {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
+        create<MavenPublication>("maven") {
+            groupId = "com.github.bythepowerofscience"
+            artifactId = "BrigadierDSL"
+            version = "1.0.0"
+            from(components["release"])
         }
     }
 }
