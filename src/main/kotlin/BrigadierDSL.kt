@@ -21,40 +21,6 @@ import com.mojang.brigadier.tree.LiteralCommandNode
 import java.util.concurrent.CompletableFuture
 import java.util.function.Predicate
 
-
-fun foo() {
-literal<Command<*>>("find") {
-    "my" {
-        "item_arg"(StringArgumentType.string()) {
-            requires { it.isPlayer }
-            suggests { ctx ->
-                !"ball"
-                !1
-                "car" { "This will be a tooltip!" }
-                2 { "This will be another tooltip!" }
-                withOffset(5) {
-                    "future" { "Using knowledge of stuff after this arg!" }
-                }
-            }
-            executes { ctx ->
-                val toFind = ctx.optionalArgument<String>("item_arg")
-                    ?: return@executes ctx.sendFailure("You didn't ask for an item!")
-                
-                if (toFind == "car")
-                    return@executes ctx.sendSuccess("yay!")
-                
-                return@executes 0
-            }
-            "here" {
-                executes(::makeHereCommand)
-            }
-        }
-    }
-}
-}
-
-
-
 object Command {
     /**
      * Start a command tree with the DSL builder.
@@ -62,21 +28,52 @@ object Command {
      * Example usage:
      * ```kotlin
      * // Start the command tree
+     * literal<Command<*>>("find") {
+     *     // Add a literal. Command at this point is "/find my"
+     *     "my" {
+     *         // Add a "string" argument with the name "item_arg"
+     *         "item_arg"(StringArgumentType.string()) {
+     *             requires { it.isPlayer }
+     *             // Add suggestions. The ! operator adds a literal, and the invoke adds a literal with a tooltip.
+     *             suggests { ctx ->
+     *                 !"ball"
+     *                 !1
+     *                 "car" { "This will be a tooltip!" }
+     *                 2 { "This will be another tooltip!" }
+     *                 withOffset(5) {
+     *                     "future" { "Using knowledge of later words!" }
+     *                 }
+     *             }
+     *             executes { ctx ->
+     *                 val toFind = ctx.optionalArgument<String>("item_arg")
+     *                     ?: return@executes ctx.sendFailure("You didn't ask for an item!")
      *
+     *                 if (toFind == "car")
+     *                     return@executes ctx.sendSuccess("yay!")
+     *
+     *                 return@executes 0
+     *             }
+     *             "here" {
+     *                 executes(::myCommand)
+     *             }
+     *             +cachedCommandBuilder
+     *         }
+     *     }
+     * }
      * ```
      *
-     * Different aliases for [LiteralArgumentBuilder.literal]:
+     * Aliases for [LiteralArgumentBuilder.literal]:
      * ```kotlin
      * literal("foo") { }
      * "bar" { }
      * ```
      *
-     * Different aliases for [RequiredArgumentBuilder.argument]:
+     * Aliases for [RequiredArgumentBuilder.argument]:
      * ```kotlin
      * argument("name", StringArgumentType.word()) { }
      * arg("name", StringArgumentType.string()) { }
      * BoolArgumentType.bool()("name") { }
-     * "name"
+     * "name"(BoolArgumentType.bool()) { }
      * ```
      */
     inline fun <T> literal(name: String, crossinline then: LiteralBuilder<T>.() -> Unit): LiteralArgumentBuilder<T> {
@@ -252,7 +249,11 @@ value class ArgBuilder<S, T>(val internal: RequiredArgumentBuilder<S, T>) {
         internal.requires(condition)
     }
     
-    
+    /**
+     * Add suggestions that the user will see while typing this command.
+     *
+     * @see SuggestionsBuilderDSL
+     */
     inline fun suggests(crossinline suggestionProvider: SuggestionsBuilderDSL.(CommandContext<S>) -> Unit) {
         internal.suggests { ctx, builder ->
             SuggestionsBuilderDSL(builder).apply {
@@ -416,8 +417,6 @@ value class ArgBuilder<S, T>(val internal: RequiredArgumentBuilder<S, T>) {
         
     }
 }
-
-class ArgTypePair<T>(val name: String, val type: ArgumentType<T>)
 
 @JvmInline
 @BrigadierDSL
