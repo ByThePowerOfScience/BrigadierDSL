@@ -1,6 +1,8 @@
 
 A Kotlin DSL wrapping Mojang's Brigadier builder.  See [BrigadierDSL.kt](src/main/kotlin/BrigadierDSL.kt).
 
+Every single call is inlined, so there's no performance cost to using this over the original.  Hope this helps!
+
 Example Usage:
 ```kotlin
 import btpos.dsl.brigadier.Command
