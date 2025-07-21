@@ -34,3 +34,11 @@ publishing {
         }
     }
 }
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            "FMLModType" to "LIBRARY"
+        )
+    }
+}
