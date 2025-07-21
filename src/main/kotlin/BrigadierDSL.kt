@@ -28,7 +28,7 @@ object Command {
      * Example usage:
      * ```kotlin
      * // Start the command tree
-     * literal<Command<*>>("find") {
+     * literal<CommandSourceStack>("find") {
      *     // Add a literal. Command at this point is "/find my"
      *     "my" {
      *         // Add a "string" argument with the name "item_arg"

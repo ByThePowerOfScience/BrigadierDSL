@@ -1,9 +1,10 @@
 plugins {
     kotlin("jvm") version "2.1.20"
+    `maven-publish`
 }
 
 group = "btpos.dsl.brigadier"
-version = "1.0"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -20,4 +21,12 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(8)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
 }
