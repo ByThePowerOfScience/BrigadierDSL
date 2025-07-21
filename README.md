@@ -1,8 +1,10 @@
 
-A Kotlin DSL wrapping Mojang's Brigadier library.  See [BrigadierDSL.kt](src/main/kotlin/BrigadierDSL.kt).
+A Kotlin DSL wrapping Mojang's Brigadier builder.  See [BrigadierDSL.kt](src/main/kotlin/BrigadierDSL.kt).
 
 Example Usage:
 ```kotlin
+import btpos.dsl.brigadier.Command
+
 // Start the command tree
 Command.literal<CommandSourceStack>("find") {
     // Add a literal. Command at this point is "/find my"
