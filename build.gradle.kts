@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.20"
+    kotlin("jvm") version "2.0.0"
     `maven-publish`
 }
 
@@ -29,6 +29,7 @@ publishing {
             groupId = "com.github.bythepowerofscience"
             artifactId = "BrigadierDSL"
             version = "1.0.0"
+            
             from(components["java"])
         }
     }
