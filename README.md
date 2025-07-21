@@ -63,6 +63,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.bythepowerofscience:BrigadierDSL:1.0.1")
+    implementation("com.github.bythepowerofscience:BrigadierDSL:v1.0.1")
 }
 ```
